@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset="utf-8">
+     <title>ECharts 实例</title>
+     <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/jquery"></script>
+     <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+</head>
+
+<body>
+     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+     <div id="main" style="width: 900px;height:300px;"></div>
+     <script type="text/javascript">
+          // 基于准备好的dom，初始化echarts实例
+          var myChart = echarts.init(document.getElementById('main'), 'dark');
+
+          // 指定图表的配置项和数据
+          $.get('GDP.json', function (data) {
+               option = {
+                    dataset: [{
+                              id: "dataset_raw",
+                              source: data
+                         },
+                         {
+                              id: "广东省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '广东省'
+                                   }
+                              },
+
+                         },
+                         {
+                              id: "新疆维吾尔自治区",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '新疆维吾尔自治区'
+                                   }
+                              }
+                         },
+                         {
+                              id: "江苏省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '江苏省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "黑龙江省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '黑龙江省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "北京市",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '北京市'
+                                   }
+                              }
+                         },
+                         {
+                              id: "陕西省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '陕西省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "安徽省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '安徽省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "浙江省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '浙江省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "宁夏回族自治区",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '宁夏回族自治区'
+                                   }
+                              }
+                         },
+                         {
+                              id: "内蒙古自治区",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '内蒙古自治区'
+                                   }
+                              }
+                         },
+                         {
+                              id: "山西省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '山西省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "江西省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '江西省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "河南省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '河南省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "河北省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '河北省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "天津市",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '天津市'
+                                   }
+                              }
+                         },
+                         {
+                              id: "广西壮族自治区",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '广西壮族自治区'
+                                   }
+                              }
+                         },
+                         {
+                              id: "吉林省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '吉林省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "四川省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '四川省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "青海省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '青海省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "甘肃省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '甘肃省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "福建省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '福建省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "云南省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '云南省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "山东省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '山东省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "上海市",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '上海市'
+                                   }
+                              }
+                         },
+                         {
+                              id: "贵州省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '贵州省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "湖北省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '湖北省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "中国",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '中国'
+                                   }
+                              }
+                         },
+                         {
+                              id: "辽宁省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '辽宁省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "湖南省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '湖南省'
+                                   }
+                              }
+                         },
+                         {
+                              id: "西藏自治区",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '西藏自治区'
+                                   }
+                              }
+                         },
+                         {
+                              id: "重庆市",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '重庆市'
+                                   }
+                              }
+                         },
+                         {
+                              id: "海南省",
+                              fromDatasetId: 'dataset_raw',
+                              transform: {
+                                   type: 'filter',
+                                   config: {
+                                        dimension: '省份',
+                                        '=': '海南省'
+                                   }
+                              }
+                         }
+                    ],
+                    tooltip: {
+                         trigger: 'axis'
+                    },
+                    grid: {//调整画出的图形和画布的间隔
+                         left: 90,
+                         right: 250
+                    },
+                    legend: {
+                         type: 'scroll', // 可滚动翻页的图例
+                         // orient: 'horizontal',//横向
+                         orient: 'vertical', 
+                         y: 'center', //延Y轴居中
+                         x: 'right', //居右显示
+                         align:'left',
+                         pageIconColor: '#2C86FF', //翻页箭头颜色
+                         pageIconInactiveColor: 'rgba(44,132,251,0.40)', //翻页（即翻页到头时箭头的颜色）
+                         pageIconSize: 10, //翻页按钮大小
+                         itemWidth: 16, // 设置宽度
+                         itemHeight: 16, // 设置高度
+                         pageTextStyle: {
+                              color: '#999', //翻页数字颜色
+                         }, //翻页数字设置
+                         data: "",
+                         textStyle: {
+                              color: "#ccc",
+                              fontSize: 15,
+                         },
+                         selected: {
+                              "中国": true,
+                              "广东省": false,
+                              "新疆维吾尔自治区": false,
+                              "江苏省": false,
+                              "黑龙江省": false,
+                              "北京市": false,
+                              "陕西省": false,
+                              "安徽省": false,
+                              "浙江省": false,
+                              "宁夏回族自治区": false,
+                              "内蒙古自治区": false,
+                              "山西省": false,
+                              "江西省": false,
+                              "河南省": false,
+                              "河北省": false,
+                              "天津市": false,
+                              "广西壮族自治区": false,
+                              "吉林省": false,
+                              "四川省": false,
+                              "青海省": false,
+                              "甘肃省": false,
+                              "福建省": false,
+                              "云南省": false,
+                              "山东省": false,
+                              "上海市": false,
+                              "贵州省": false,
+                              "湖北省": false,
+                              "辽宁省": false,
+                              "湖南省": false,
+                              "西藏自治区": false,
+                              "重庆市": false,
+                              "海南省": false,
+                         }
+                    },
+                    dataZoom: [{
+                              type: 'slider',
+                              show: true,
+                              xAxisIndex: [0],
+                              start: 85,
+                              end: 100
+                         },
+                         // {
+                         // type: 'slider',
+                         // show: true,
+                         // yAxisIndex: [0],
+                         // left: '93%',
+                         // start: 29,
+                         // end: 36
+                         // },
+                         {
+                              type: 'inside',
+                              xAxisIndex: [0],
+                              start: 1,
+                              end: 35
+                         },
+                         // {
+                         // type: 'inside',
+                         // yAxisIndex: [0],
+                         // start: 29,
+                         // end: 36
+                         // }
+                    ],
+                    xAxis: [{
+                         type: 'category',
+                         name: '年份',
+                         // axisTick: {
+                         // alignWithLabel: true
+                         // }
+                    }],
+                    yAxis: [{
+                         type: 'value',
+                         name: '个人收入GDP'
+                    }],
+
+                    series: [{
+                              type: 'line',
+                              datasetId: "中国",
+                              name: "中国",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "广东省",
+                              name: "广东省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "新疆维吾尔自治区",
+                              name: "新疆维吾尔自治区",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "江苏省",
+                              name: "江苏省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "黑龙江省",
+                              name: "黑龙江省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "北京市",
+                              name: "北京市",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "陕西省",
+                              name: "陕西省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "安徽省",
+                              name: "安徽省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "浙江省",
+                              name: "浙江省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "宁夏回族自治区",
+                              name: "宁夏回族自治区",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "内蒙古自治区",
+                              name: "内蒙古自治区",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "山西省",
+                              name: "山西省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "江西省",
+                              name: "江西省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "河南省",
+                              name: "河南省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "河北省",
+                              name: "河北省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "天津市",
+                              name: "天津市",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "广西壮族自治区",
+                              name: "广西壮族自治区",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "吉林省",
+                              name: "吉林省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "四川省",
+                              name: "四川省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "青海省",
+                              name: "青海省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "甘肃省",
+                              name: "甘肃省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "福建省",
+                              name: "福建省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "云南省",
+                              name: "云南省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "山东省",
+                              name: "山东省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "上海市",
+                              name: "上海市",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "贵州省",
+                              name: "贵州省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "湖北省",
+                              name: "湖北省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "辽宁省",
+                              name: "辽宁省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "湖南省",
+                              name: "湖南省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "西藏自治区",
+                              name: "西藏自治区",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "重庆市",
+                              name: "重庆市",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         },
+                         {
+                              type: 'line',
+                              datasetId: "海南省",
+                              name: "海南省",
+                              showSymbol: false,
+                              encode: {
+                                   itemName: "年份",
+                                   x: '年份',
+                                   y: '人均地区生产总值_元',
+                                   tooltip: ['人均地区生产总值_元']
+                              }
+                         }
+                    ]
+               };
+
+               myChart.setOption(option);
+          });
+          window.addEventListener('resize', myChart.resize);
+     </script>
+</body>
+
+</html>

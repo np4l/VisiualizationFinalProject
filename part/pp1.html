@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <meta charset="utf-8">
+     <title>ECharts 实例</title>
+     <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/jquery"></script>
+     <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+</head>
+
+<body>
+     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+     <div id="main" style="width: 900px;height:500px;"></div>
+     <script type="text/javascript">
+          // 基于准备好的dom，初始化echarts实例
+          var myChart = echarts.init(document.getElementById('main'), 'dark');
+
+          // 指定图表的配置项和数据
+          $.get('GDP1.json', function (data) {
+               const updateFrequency = 2000;
+               const countryColors = {
+                    江苏省: '#00008b',
+                    湖南省: '#f00',
+                    辽宁省: '#ffde00',
+                    北京市: '#002a8f',
+                    天津市: '#003580',
+                    上海市: '#ed2939',
+                    广东省: 'yellow',
+                    福建省: '#003897',
+                    山东省: '#f93',
+                    四川省: '#bc002d',
+                    湖北省: '#024fa2',
+                    // 浙江省: '#000',
+                    安徽省: '#00247d',
+                    重庆市: '#ef2b2d',
+                    江西省: '#dc143c',
+                    吉林省: '#d52b1e',
+                    黑龙江省: '#e30a17',
+                    河南省: '#00247d',
+                    河北省: '#b22234'
+               };
+               const years = [];
+               for (let i = 0; i < data.length; ++i) {
+                    if (years.length === 0 || years[years.length - 1] !== data[i][0]) {
+                         years.push(data[i][0]);
+                    }
+               }
+               console.log(years);
+               let startIndex = 0;
+               let startYear = years[startIndex];
+               option = {
+                    grid: {
+                         top: 10,
+                         bottom: 30,
+                         left: 150,
+                         right: 80
+                    },
+                    toolbox: {
+                         show: true,
+                         feature: {
+                              mark: {
+                                   show: true
+                              },
+                              mytool: {
+                                   show: true,
+                                   title: 'replay',
+                                   icon: 'path://M128 149.333333c11.946667 0 21.333333 9.386667 21.333333 21.333334v161.28C215.893333 198.826667 353.28 106.666667 512 106.666667c110.933333 0 214.613333 43.946667 291.84 123.733333 8.106667 8.533333 8.106667 22.186667-0.426667 30.293333-8.533333 8.106667-22.186667 8.106667-30.293333-0.426666A359.381333 359.381333 0 0 0 512 149.333333c-200.106667 0-362.666667 162.56-362.666667 362.666667 0 11.946667-9.386667 21.333333-21.333333 21.333333s-21.333333-9.386667-21.333333-21.333333V170.666667c0-11.946667 9.386667-21.333333 21.333333-21.333334zM260.266667 773.12A360.021333 360.021333 0 0 0 512 874.666667c200.106667 0 362.666667-162.56 362.666667-362.666667 0-11.946667 9.386667-21.333333 21.333333-21.333333s21.333333 9.386667 21.333333 21.333333v341.333333c0 11.946667-9.386667 21.333333-21.333333 21.333334s-21.333333-9.386667-21.333333-21.333334v-161.28c-66.56 133.546667-203.946667 225.28-362.666667 225.28-105.386667 0-205.653333-40.533333-281.6-113.92-8.533333-8.106667-8.533333-21.76-0.426667-30.293333 8.106667-8.106667 21.76-8.533333 30.293334 0z',
+                                   onclick: function () {
+                                        location.reload()
+                                   }
+                              }
+                         }
+                    },
+                    xAxis: {
+                         max: 'dataMax',
+                         name: "GDP",
+                         axisLabel: {
+                              formatter: function (n) {
+                                   return Math.round(n);
+                              }
+                         }
+                    },
+                    dataset: {
+                         source: data.slice(1).filter(function (d) {
+                              return d[0] === startYear;
+                         })
+                    },
+                    yAxis: {
+                         type: 'category',
+                         inverse: true,
+                         max: 10,
+                         axisLabel: {
+                              show: true,
+                              fontSize: 14,
+                              formatter: function (value) {
+                                   return value;
+                              },
+                              rich: {
+                                   flag: {
+                                        fontSize: 25,
+                                        padding: 5
+                                   }
+                              }
+                         },
+                         animationDuration: 300,
+                         animationDurationUpdate: 300
+                    },
+                    series: [{
+                         realtimeSort: true,
+                         seriesLayoutBy: 'column',
+                         type: 'bar',
+                         itemStyle: {
+                              color: function (param) {
+                                   return countryColors[param.value[2]] || '#5470c6';
+                              }
+                         },
+                         encode: {
+                              x: 3,
+                              y: 2
+                         },
+                         label: {
+                              show: true,
+                              precision: 1,
+                              position: 'right',
+                              valueAnimation: true,
+                              fontFamily: 'monospace'
+                         }
+                    }],
+                    animationDuration: 3000,
+                    animationDurationUpdate: 3000,
+                    animationEasing: 'linear',
+                    animationEasingUpdate: 'linear',
+                    graphic: { //更改右下角的年份数字
+                         elements: [{
+                              type: 'text',
+                              right: 50,
+                              bottom: 60, 
+                              style: {
+                                   text: startYear,
+                                   font: 'bolder 80px monospace',
+                                   fill: 'rgba(100, 100, 100, 0.25)'
+                              },
+                              z: 100
+                         }]
+                    }
+               };
+               myChart.setOption(option);
+               for (let i = startIndex; i < years.length - 1; ++i) {
+                    (function (i) {
+                         setTimeout(function () {
+                              updateYear(years[i + 1]);
+                         }, (i - startIndex) * updateFrequency);
+                    })(i);
+               }
+
+               function updateYear(year) {
+                    let source = data.slice(1).filter(function (d) {
+                         return d[0] === year;
+                    });
+                    option.series[0].data = source;
+                    option.graphic.elements[0].style.text = year;
+                    myChart.setOption(option);
+               }
+          });
+          
+          window.addEventListener('resize', myChart.resize);
+     </script>
+</body>
+
+</html>
