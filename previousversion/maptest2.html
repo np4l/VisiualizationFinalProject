@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>China Map</title>
+    </head>
+    <style>
+        body{
+            background: black;
+        }
+        #southsea{
+            stroke:#63B8FF;
+            stroke-width: 1px;
+        }
+    </style>
+    <body>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script>
+            //控制画布长宽
+            var width = 1500;
+            var height = 800;
+            //END
+
+            //新建svg图形画布
+            var svg = d3.select("body").append("svg").attr("width",width).attr("height",height);
+            //END
+
+            //设置经纬度缩放函数
+            var projection = d3.geo.mercator().center([105,40]).scale(900).translate([width/2,height/2]);
+            var path = d3.geo.path().projection(projection);
+            //END
+
+            //设置鼠标缩放
+            var zoom = d3.behavior.zoom().scaleExtent([1,10]).on("zoom",zoomed);
+            function zoomed(){
+                d3.select(this).attr("transform","translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+            }
+            //END
+
+            //新建g标签，并回调鼠标缩放
+            china = svg.append('g').call(zoom);
+
+            //绘制中国地图,这里需要下载一个geojson文件
+         d3.json("China.geo.json",function(error,root){
+                if(error) return console.error(error);
+
+                var province = china
+                    .selectAll("path") //选中china内的所有path标签
+                    .data(root.features)   //所用数据为geojson文件下的features内容
+                    .enter()    //进入循环内部
+                    .append("path")    //每一次循环新建一个path标签
+                    .attr("d",path)     //对于每个path标签中的d标签用path绘制
+                    .attr("stroke","#63B8FF")  //path的颜色
+                    .attr("stroke-width",1)   //path的粗细
+                    .attr("fill","black");   //path围起来的块颜色
+            });
+            //END
+
+
+            //绘制南海，需要下载一个svg文件
+            // d3.xml("../../static/southchinasea.svg",function(error,xmlDocument){
+            //     china.append("g").html(function(d){
+            //         //新建一个g标签绘制南海
+            //        return d3.select(this).html() + xmlDocument.getElementsByTagName("g")[0].outerHTML;
+            //     });
+            //     //给南海赋予平移度和缩放比
+            //     var gSouthSea = d3.select("#southsea");
+            //     gSouthSea.attr("transform","translate(1100,600) scale(0.5)").attr("class","southsea");
+            // });
+            //END
+
+        </script>
+    </body>
+</html>

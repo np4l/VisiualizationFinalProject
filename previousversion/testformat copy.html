@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>中国近年GDP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://d3js.org//d3.v7.js" charset="utf-8"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100%;
+            background-color: #bdb3b3;
+        }
+
+        /* 头部样式 */
+        .header {
+            /* background-color: #f1f1f1; */
+            padding: 5px;
+            text-align: center;
+
+        }
+
+        .header.left {
+            float: left;
+            padding: 10px;
+            width: 60%;
+            /* background-color: #bbb7b7; */
+        }
+
+        .header.left.upper {
+            height: 10%;
+            width: 100%;
+            /* background-color: #a53e3e; */
+        }
+
+        .header.left.lower {
+            height: 90%;
+            width: 100%;
+            /* background-color: aqua; */
+        }
+
+        .header.right {
+            float:left;
+            width: 40%;
+            /* background-color: #f1f1f1; */
+        }
+
+        .header.right.upper {
+            /* background-color: azure; */
+             width: 100%;
+            height: 50%
+        }
+
+        .header.right.upper.left1 {
+           
+            width: 50%;
+            height:100%;
+            /* background-color: blue; */
+            
+        }
+
+        .header.right.upper.right1 {
+            float:right;
+            width: 50%;
+            height:100%;
+            /* background-color: darkgreen; */
+            /* float:right; */
+        }
+
+        .header.right.lower {
+            /* background-color: bisque; */
+            width: 100%;
+            height: 50%;
+        }
+
+        /* 创建三个相等的列 */
+        .column {
+            float: left;
+            padding: 10px;
+
+        }
+
+        /* 左右两侧宽度 */
+        .column.side {
+            width: 30%;
+            background-color: #bbb7b7;
+        }
+
+        /* 中间区域宽度 */
+        .column.middle {
+            width: 70%;
+        }
+
+        /* 列后面清除浮动 */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+
+        }
+
+
+
+        /* 底部样式 */
+        .footer {
+            padding: 10px;
+            text-align: center;
+            height: 100%;
+        }
+
+        .footer.left {
+            float: left;
+            width: 50%;
+            /* background-color: #817272; */
+        }
+
+        .footer.right {
+            float: right;
+            width: 50%;
+            /* background-color: #a09191; */
+        }
+    </style>
+</head>
+
+<body>
+    <div name="container1" >
+        <div class="header">
+            <div class="header left">
+                <div class="header left upper">
+                    <h1>头部区域left upper 时间轴</h1>
+                </div>
+                <div class="header left lower">
+                    <h1>头部区域left lower 地图</h1>
+                </div>
+            </div>
+            <div class="header right">
+                
+                <div class="header right upper">
+                    <div class="header right upper left1">
+                        <h1>头部区域right upper left刘正鹏 饼图</h1>
+                    </div>
+                    <div class="header right upper right1">
+                        <h1>头部区域right upper right薛勾玉 图片</h1>
+                    </div>
+                </div>
+                
+                <div class="header right lower">
+                    <h1>头部区域right lower 颜开难柱状图</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div name="container3" style="height:20%">
+        <div class="footer">
+            <div class="footer left">
+                <h2>段小伟 折线图</h2>
+
+            </div>
+            <div class="footer right">
+                <h2>颜开难 折线图</h2>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        //var height=window.screen.height
+        var height = window.innerHeight
+        var width = window.innerWidth
+        var div1 = document.getElementsByClassName("header");
+        var div2 = document.getElementsByClassName("header left");
+        var div3 = document.getElementsByClassName("header right");
+        var div4 = document.getElementsByClassName("footer");//left right一般不需要设定看宽度，但是高度需要设定
+        var div5 = document.getElementsByClassName("header right upper left1");
+        var div6 = document.getElementsByClassName("header right upper right1");
+        console.log(height)
+        console.log(div1)
+        div1[0].style.height = 0.7 * height + 'px'
+        div2[0].style.height = 0.7 * height + 'px'
+        div3[0].style.height = 0.7 * height + 'px'
+        div4[0].style.height = 0.3 * height + 'px'
+        //0.3*0.5
+        //  div5[0].style.width = 0.15 * width + 'px'
+        //  //div5[0].style.float='left'
+        //  div6[0].style.width = 0.15 * width + 'px'
+    </script>
+</body>
+
+</html>
